@@ -62,6 +62,7 @@ def predict_event_from_folder(album_path, label_names = label_names, device='cud
     features = extractor.combine_embeddings  # (20, 1024)
 
     X_input = np.expand_dims(features, axis=0)  # (1, 20, 1024)
+    print("X_input shape", X_input.shape)
 
     # Dự đoán
     y_pred = attention_model.predict(X_input)
