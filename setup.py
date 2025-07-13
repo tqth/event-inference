@@ -14,8 +14,8 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/tqth/event-inference",
     author="Quoc Thinh",
-    packages=find_packages(where="event_inference"),  # Chỉ tìm package trong event_inference
-    package_dir={"": "event_inference"},  # Định nghĩa gốc package là event_inference
+    packages=find_packages(where="event_inference"),  # Tìm package trong event_inference
+    package_dir={"": "event_inference"},  # Định nghĩa gốc là event_inference
     install_requires=[
         "torch>=1.7.0",
         "torchvision>=0.8.0",
