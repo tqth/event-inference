@@ -4,12 +4,12 @@ import gc
 from torchvision import transforms
 import clip
 from tqdm import tqdm
-
-clip_model, clip_preprocess = clip.load("ViT-B/32", device='cuda')
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+clip_model, clip_preprocess = clip.load("ViT-B/32", device=device)
 clip_model.eval()
 
 class CLIPRAMFeatureInferencer:
-    def __init__(self, ram_model, clip_model, clip_preprocess, inference_ram, device='cuda', embedding_dim=512):
+    def __init__(self, ram_model, clip_model, clip_preprocess, inference_ram, device=device, embedding_dim=512):
         """
         Dùng cho inference: chỉ trích xuất đặc trưng thị giác và đặc trưng văn bản từ RAM + CLIP.
 
