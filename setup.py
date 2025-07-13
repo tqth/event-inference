@@ -25,7 +25,7 @@ setup(
         "scikit-learn>=0.24.0",
         "tensorflow>=2.4.0",
         "clip @ git+https://github.com/openai/CLIP.git",
-        "recognize-anything @ git+https://github.com/tqth/recognize-anything.git",
+        "ram @ git+https://github.com/tqth/recognize-anything.git",
     ],
     python_requires=">=3.7",
     classifiers=[
