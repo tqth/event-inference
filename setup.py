@@ -14,7 +14,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/tqth/event-inference",
     author="Quoc Thinh",
-    packages=find_packages(),  # Tìm tất cả package trong thư mục gốc
+    packages=find_packages(),  # Tìm package trong thư mục gốc
     package_dir={"": "."},  # Định nghĩa gốc package là thư mục hiện tại
     py_modules=["predict_event"],  # Bao gồm module riêng lẻ predict_event.py
     install_requires=[
