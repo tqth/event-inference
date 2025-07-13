@@ -1,5 +1,3 @@
-# predict_event.py
-
 from models.attention_model import AttentionNetworkMultiLabel
 from models.clip_ram_inferencer import CLIPRAMFeatureInferencer
 from dataset.album_dataset import AlbumInferenceDataset
