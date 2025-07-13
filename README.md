@@ -39,7 +39,7 @@ pip install -r requirements.txt
 🔍 Step-by-step
 ```python
 from predict_event import predict_event_and_top_n_images_from_folder
-album_path = "/kaggle/input/thesis-cufed/CUFED/images/0_10017016@N03"
+album_path = "/path/example_album"
 event, key_images = predict_event_and_top_n_images_from_folder(album_path, n_key_images= 5)
 print("Prediction:", event)
 print("Key images:", key_images)
