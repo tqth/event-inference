@@ -61,9 +61,9 @@ def predict_event_and_top_n_images_from_folder(album_path, label_names = label_n
 
     # Trích xuất đặc trưng
     extractor.process(dataloader)
-    features = extractor.combine_embeddings  # (20, 1024)
+    features = extractor.combine_embeddings
 
-    X_input = np.expand_dims(features, axis=0)  # (1, 20, 1024)
+    X_input = np.expand_dims(features, axis=0)
     X_input = X_input.astype('float32')
     print("X_input shape", X_input.shape)
     print("X_input type", X_input.dtype)
