@@ -5,8 +5,6 @@ from models.clip_ram_inferencer import CLIPRAMFeatureInferencer
 from dataset.album_dataset import AlbumInferenceDataset
 from utils.label_utils import one_hot_to_label
 
-import torch
-from torchvision import transforms
 from torch.utils.data import DataLoader
 import numpy as np
 
