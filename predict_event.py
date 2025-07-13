@@ -36,7 +36,7 @@ def load_models(device=device):
         clip_preprocess=clip_preprocess,
         inference_ram=inference_ram,
         device=device,
-        embedding_dim=512
+        embedding_dim=1024
     )
 
     return attention_model, extractor
