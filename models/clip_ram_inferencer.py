@@ -56,8 +56,9 @@ class CLIPRAMFeatureInferencer:
         self.visual_embeddings = []
         self.text_embeddings = []
         self.combine_embeddings = []
+        self.filenames_per_album = []
 
-        for album_images in tqdm(dataloader, desc="Extracting features for inference"):
+        for album_images, image_filenames in tqdm(dataloader, desc="Extracting features for inference"):
             album_images = album_images.squeeze(0).to(self.device)
 
             # Tiền xử lý ảnh cho CLIP
@@ -96,6 +97,9 @@ class CLIPRAMFeatureInferencer:
             # Gộp đặc trưng
             combined = np.concatenate([visual_embeds, text_embeds], axis=1)
             self.combine_embeddings.append(combined)
+
+            # Lưu tên ảnh tương ứng
+            self.filenames_per_album.append(image_filenames)
 
             del album_images, processed_images
             gc.collect()

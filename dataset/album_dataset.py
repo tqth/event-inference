@@ -4,6 +4,7 @@ import torch
 import os
 import random
 from torchvision import transforms
+
 class AlbumInferenceDataset(Dataset):
     def __init__(self, album_path, album_size=20):
         """
@@ -32,17 +33,19 @@ class AlbumInferenceDataset(Dataset):
 
         if not self.image_paths:
             images = [torch.zeros(3, 384, 384)] * self.album_size
+            selected_image_paths = ['empty.jpg'] * self.album_size
         else:
             if len(self.image_paths) < self.album_size:
-                selected_images = random.choices(self.image_paths, k=self.album_size)
+                selected_image_paths = random.choices(self.image_paths, k=self.album_size)
             else:
-                selected_images = random.sample(self.image_paths, k=self.album_size)
-            
+                selected_image_paths = random.sample(self.image_paths, k=self.album_size)
+        
             images = []
-            for image_path in selected_images:
+            for image_path in selected_image_paths:
                 image = Image.open(os.path.join(self.album_path, image_path)).convert('RGB')
                 if self.transform:
                     image = self.transform(image)
                 images.append(image)
 
-        return torch.stack(images)
+        return torch.stack(images), selected_image_paths
+

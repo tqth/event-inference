@@ -1,6 +1,7 @@
-import tensorflow as tf
 import numpy as np
 from sklearn.metrics import average_precision_score
+import tensorflow as tf
+
 class AttentionNetworkMultiLabel():
     def __init__(self, input_shape, output_shape):
         self.input_layer = tf.keras.Input(shape=input_shape)
@@ -80,3 +81,28 @@ class AttentionNetworkMultiLabel():
     def load_weights(self, filepath):
         self.model.load_weights(filepath)
         print(f"Model weights loaded from: {filepath}")
+    def get_top_n_important_images(self, X, n=3):
+        """
+        Lấy top-n ảnh quan trọng nhất từ đầu vào dựa trên attention weights.
+
+        Args:
+            X (np.ndarray): Dữ liệu đầu vào có shape (batch_size, num_images, feature_dim)
+            n (int): Số lượng ảnh quan trọng cần lấy
+
+        Returns:
+            top_indices (np.ndarray): Mảng chỉ số top-n ảnh (batch_size, n)
+            top_weights (np.ndarray): Mảng attention weights tương ứng (batch_size, n)
+        """
+        # Tạo model phụ để trích attention weights
+        attention_model = tf.keras.Model(inputs=self.model.input, outputs=self.softmax_layer)
+        attention_weights = attention_model.predict(X)
+
+        # Lấy top-n chỉ số attention cao nhất
+        top_indices = np.argsort(attention_weights, axis=1)[:, -n:][:, ::-1]
+        batch_size = X.shape[0]
+        top_weights = np.zeros((batch_size, n))
+
+        for i in range(batch_size):
+            top_weights[i] = attention_weights[i, top_indices[i]]
+
+        return top_indices, top_weights

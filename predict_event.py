@@ -3,7 +3,7 @@
 from models.attention_model import AttentionNetworkMultiLabel
 from models.clip_ram_inferencer import CLIPRAMFeatureInferencer
 from dataset.album_dataset import AlbumInferenceDataset
-from utils.label_utils import one_hot_to_label
+from utils.label_utils import one_hot_to_label, map_top_indices_to_filenames
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
@@ -42,7 +42,7 @@ def load_models(device=device):
     return attention_model, extractor
 
 
-def predict_event_from_folder(album_path, label_names = label_names, device=device):
+def predict_event_and_top_n_images_from_folder(album_path, label_names = label_names, n_key_images = 5, device=device):
     """
     Dự đoán sự kiện cho một thư mục ảnh (album).
 
@@ -72,4 +72,8 @@ def predict_event_from_folder(album_path, label_names = label_names, device=devi
     y_pred = attention_model.predict(X_input)
     labels = one_hot_to_label(y_pred[0], label_names)
 
-    return labels
+    #Dự đoán ảnh quan trọng
+    top_indices, top_weights = attention_model.get_top_n_important_images(X_input, n=n_key_images)
+    top_filenames = map_top_indices_to_filenames(extractor.filenames_per_album[0], top_indices)
+
+    return labels, top_filenames
