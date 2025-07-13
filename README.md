@@ -37,8 +37,10 @@ pip install -r requirements.txt
 
 ---
 ## ⚠️ Important Note: Run on CPU only
+
 This project and its dependencies are currently tested and intended to run only on CPU environments.
 Running on GPU may cause unexpected errors or unstable behavior due to compatibility issues with some libraries.
+
 ---
 
 ## 🚀 Run Inference on an Album
