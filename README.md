@@ -43,6 +43,13 @@ Running on GPU may cause unexpected errors or unstable behavior due to compatibi
 
 ---
 
+## 🎯 Example Usage
+
+This project includes a Jupyter Notebook (`inference_event_demo.ipynb`) that demonstrates a full inference pipeline from loading an album folder to predicting event labels and extracting important images.
+
+---
+
+
 ## 🚀 Run Inference on an Album
 🔍 Step-by-step
 ```python
