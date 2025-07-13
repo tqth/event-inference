@@ -12,7 +12,7 @@ Given a folder of images (an album), this system:
 
 1. Extracts visual features from [CLIP](https://github.com/openai/CLIP)
 2. Extracts semantic tags using [RAM (Recognize Anything Model)](https://github.com/zhang-tao-whu/Recognize-Anything)
-3. Combines both features and passes them into a pretrained attention model
+3. Combines both features and feed them into a pretrained attention model
 4. Outputs:
    - **Predicted event label(s)** (multi-label)
    - **Top-N important images** based on learned attention scores
