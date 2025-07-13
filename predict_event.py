@@ -4,15 +4,17 @@ from models.attention_model import AttentionNetworkMultiLabel
 from models.clip_ram_inferencer import CLIPRAMFeatureInferencer
 from dataset.album_dataset import AlbumInferenceDataset
 from utils.label_utils import one_hot_to_label
-
+import torch
 from torch.utils.data import DataLoader
 import numpy as np
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 label_names = ['ThemePark', 'UrbanTrip', 'BeachTrip', 'NatureTrip', 'Zoo', 'Cruise', 'Show', 'Sports', 'PersonalSports',
          'PersonalArtActivity', 'PersonalMusicActivity', 'ReligiousActivity', 'GroupActivity', 'CasualFamilyGather',
          'BusinessActivity', 'Architecture', 'Wedding', 'Birthday', 'Graduation', 'Museum', 'Christmas', 'Halloween', 'Protest']
 
-def load_models(device='cuda'):
+def load_models(device=device):
     attention_model = AttentionNetworkMultiLabel(input_shape=(20, 1024), output_shape=23)
     attention_model.load_weights("weights/attention_model.h5")
 
@@ -40,7 +42,7 @@ def load_models(device='cuda'):
     return attention_model, extractor
 
 
-def predict_event_from_folder(album_path, label_names = label_names, device='cuda'):
+def predict_event_from_folder(album_path, label_names = label_names, device=device):
     """
     Dự đoán sự kiện cho một thư mục ảnh (album).
 
