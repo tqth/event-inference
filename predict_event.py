@@ -64,6 +64,7 @@ def predict_event_from_folder(album_path, label_names = label_names, device=devi
     features = extractor.combine_embeddings  # (20, 1024)
 
     X_input = np.expand_dims(features, axis=0)  # (1, 20, 1024)
+    X_input = X_input.astype('float32')
     print("X_input shape", X_input.shape)
     print("X_input type", X_input.dtype)
 
